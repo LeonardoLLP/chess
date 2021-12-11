@@ -42,5 +42,5 @@ print(board)
 """Add piece to intended spot, easier for the user"""
 def add_pieces(places: list, piece: str):
     for place in places:
-        board[place[0]][place[1]] = piece
+        board[place[0]-1][place[1]-1] = piece
 
