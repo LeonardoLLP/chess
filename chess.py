@@ -28,3 +28,12 @@ checkered_board = chr(0x1F67E)
 print(white)
 print(black)
 print(checkered_board)
+
+# Creating a board
+board = []
+for i in range(8):
+    board.append([])
+    for _ in range(8):
+        board[i].append("")
+
+print(board)
