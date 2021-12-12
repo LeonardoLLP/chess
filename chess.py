@@ -1,7 +1,6 @@
 rows = 8
 columns = 8
 
-# Queen unicode: U+2655
 white = {
     "king": chr(0x2654),
     "queen": chr(0x2655),
@@ -91,7 +90,7 @@ print_board()
 
 def ask_to_move(colour: dict):
     # Search for white piece in dictonary
-    if white["king"] in colour:
+    if colour["king"] == white["king"]:
         turn = "white"
     else:
         turn = "black"
@@ -103,16 +102,18 @@ def ask_to_move(colour: dict):
     if get_piece(_row, _column) in colour:
         print("Choose where to move your piece")
     elif get_piece(_row, _column) == "INVALID PLACE":
-        print("Choose a place inside the board.")
+        print("Choose a place inside the board. (Row and column in numbers)")
     elif get_piece(_row, _column) != "":
         print("That is not your piece! You can't move it.")
     else:
-        print("You have chosen an empty space. You can't do that")
+        print("You have chosen an empty space. You can't do that.")
 
 
-ask_to_move(white)
 
 
+# ask_to_move(white)
+
+print(list(white.values()))
 
 try:
     f = open("partida.txt", "w")
