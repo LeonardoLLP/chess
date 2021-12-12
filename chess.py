@@ -52,7 +52,6 @@ def get_piece(row: int, column: int):
     try:
         return board[row - 1][column - 1]
     except:
-        print("Invalid place you hace chosen. Suffer the consequences you must")
         return "INVALID PLACE"
 
 
@@ -91,13 +90,25 @@ print_board()
 
 
 def ask_to_move(colour: dict):
-    print("It is {} turn".format(colours[colour]))
+    # Search for white piece in dictonary
+    if white["king"] in colour:
+        turn = "white"
+    else:
+        turn = "black"
+    print("It is {} turn".format(turn + "\'s"))
+
     _row = input("Please choose a row: ")
     _column = input("Please choose a column: ")
 
     if get_piece(_row, _column) in colour:
         print("Choose where to move your piece")
-        pass
+    elif get_piece(_row, _column) == "INVALID PLACE":
+        print("Choose a place inside the board.")
+    elif get_piece(_row, _column) != "":
+        print("That is not your piece! You can't move it.")
+    else:
+        print("You have chosen an empty space. You can't do that")
+
 
 ask_to_move(white)
 
