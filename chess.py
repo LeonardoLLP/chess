@@ -20,6 +20,11 @@ black = {
     "pawn": chr(0x265F)
 }
 
+colours = {
+    "white": white,
+    "white": black
+}
+
 # in case I need it later
 checkered_board = chr(0x1F67E)
 
@@ -41,6 +46,14 @@ print(board)
 def add_pieces(places: list, piece: str):
     for place in places:
         board[place[0]-1][place[1]-1] = piece
+
+"""Obtain piece in intended spot"""
+def get_piece(row: int, column: int):
+    try:
+        return board[row - 1][column - 1]
+    except:
+        print("Invalid place you hace chosen. Suffer the consequences you must")
+        return "INVALID PLACE"
 
 
 def print_board():
@@ -78,16 +91,20 @@ print_board()
 
 
 def ask_to_move(colour: dict):
-    print("It is {} turn".format("White or black?"))
+    print("It is {} turn".format(colours[colour]))
     _row = input("Please choose a row: ")
     _column = input("Please choose a column: ")
 
-    if board[_row - 1][_column-1] in colour:
-        # Play is allowed
+    if get_piece(_row, _column) in colour:
+        print("Choose where to move your piece")
         pass
+
+ask_to_move(white)
+
+
 
 try:
     f = open("partida.txt", "w")
-    f.write(str(board))
+    f.write("Board")
 finally:
     f.close()
