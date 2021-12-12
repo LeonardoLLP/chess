@@ -96,8 +96,8 @@ def ask_to_move(colour: dict):
         turn = "black"
     print("It is {} turn".format(turn + "\'s"))
 
-    r = input("Please choose a row: ")
-    c = input("Please choose a column: ")
+    r = int(input("Please choose a row: "))
+    c = int(input("Please choose a column: "))
 
     if get_piece(r, c) in list(colour.values()):
         print("Choose where to move your piece")
