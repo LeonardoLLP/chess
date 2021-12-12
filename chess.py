@@ -44,3 +44,7 @@ def add_pieces(places: list, piece: str):
     for place in places:
         board[place[0]-1][place[1]-1] = piece
 
+add_pieces([(1, 1), (1, 8)], white["rook"])
+
+print(board)
+
