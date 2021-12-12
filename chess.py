@@ -46,7 +46,7 @@ def add_pieces(places: list, piece: str):
 
 add_pieces([(1, 1), (1, 8)], white["rook"])
 
-print(board)
+
 
 def print_board():
     for row in range(1, len(board) + 1):
@@ -60,3 +60,6 @@ def print_board():
                 print("{:6}".format("\'" + row_to_print[index] + "\'"), end="")
         print("]")
 
+f = open("partida.txt", "w")
+
+f.close()
