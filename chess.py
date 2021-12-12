@@ -96,22 +96,23 @@ def ask_to_move(colour: dict):
         turn = "black"
     print("It is {} turn".format(turn + "\'s"))
 
-    _row = input("Please choose a row: ")
-    _column = input("Please choose a column: ")
+    r = input("Please choose a row: ")
+    c = input("Please choose a column: ")
 
-    if get_piece(_row, _column) in colour:
+    if get_piece(r, c) in list(colour.values()):
         print("Choose where to move your piece")
-    elif get_piece(_row, _column) == "INVALID PLACE":
+    elif get_piece(r, c) == "INVALID PLACE":
         print("Choose a place inside the board. (Row and column in numbers)")
-    elif get_piece(_row, _column) != "":
+    elif get_piece(r, c) != "":
         print("That is not your piece! You can't move it.")
     else:
         print("You have chosen an empty space. You can't do that.")
 
+print(get_piece(1, 1) in list(white.values()))
+print(get_piece(1, 1))
+print(white["rook"])
 
-
-
-# ask_to_move(white)
+ask_to_move(white)
 
 print(list(white.values()))
 
