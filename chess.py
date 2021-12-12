@@ -24,7 +24,6 @@ black = {
 checkered_board = chr(0x1F67E)
 
 
-
 print(white)
 print(black)
 print(checkered_board)
@@ -38,14 +37,10 @@ for i in range(8):
 
 print(board)
 
-# TODO: Test
 """Add piece to intended spot, easier for the user"""
 def add_pieces(places: list, piece: str):
     for place in places:
         board[place[0]-1][place[1]-1] = piece
-
-add_pieces([(1, 1), (1, 8)], white["rook"])
-
 
 
 def print_board():
@@ -59,6 +54,25 @@ def print_board():
             else:
                 print("{:6}".format("\'" + row_to_print[index] + "\'"), end="")
         print("]")
+
+# TODO: Revisar si es optimizable
+# Add white pieces
+add_pieces([(1, 1), (1, 8)], white["rook"])
+add_pieces([(1, 2), (1, 7)], white["knight"])
+add_pieces([(1, 3), (1, 6)], white["bishop"])
+add_pieces([(1, 4)], white["queen"])
+add_pieces([(1, 5)], white["king"])
+
+# Add black pieces
+add_pieces([(8, 1), (8, 8)], black["rook"])
+add_pieces([(8, 2), (8, 7)], black["knight"])
+add_pieces([(8, 3), (8, 6)], black["bishop"])
+add_pieces([(8, 4)], black["queen"])
+add_pieces([(8, 5)], black["king"])
+
+
+
+print_board()
 
 f = open("partida.txt", "w")
 
