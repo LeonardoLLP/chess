@@ -86,7 +86,8 @@ def ask_to_move(colour: dict):
         # Play is allowed
         pass
 
-
-f = open("partida.txt", "w")
-
-f.close()
+try:
+    f = open("partida.txt", "w")
+    f.write(str(board))
+finally:
+    f.close()
