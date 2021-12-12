@@ -76,6 +76,17 @@ add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
 print_board()
 
+
+def ask_to_move(colour: dict):
+    print("It is {} turn".format("White or black?"))
+    _row = input("Please choose a row: ")
+    _column = input("Please choose a column: ")
+
+    if board[_row - 1][_column-1] in colour:
+        # Play is allowed
+        pass
+
+
 f = open("partida.txt", "w")
 
 f.close()
