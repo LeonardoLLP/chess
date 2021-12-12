@@ -48,11 +48,15 @@ add_pieces([(1, 1), (1, 8)], white["rook"])
 
 print(board)
 
-for row in range(1, len(board) + 1):
-    print("[", end="")
-    for index in range(len(row)):
-        if index != len(row) - 1:
-            print("{:6}".format("\'" + row[index] + "\', "), end="")
-        else:
-            print("{:6}".format("\'" + row[index] + "\'"), end="")
-    print("]")
+def print_board():
+    for row in range(1, len(board) + 1):
+        # Simplify a bit this variable
+        row_to_print = board[-row]
+        print("[", end="")
+        for index in range(len(row_to_print)):
+            if index != len(row_to_print) - 1:
+                print("{:6}".format("\'" + row_to_print[index] + "\', "), end="")
+            else:
+                print("{:6}".format("\'" + row_to_print[index] + "\'"), end="")
+        print("]")
+
