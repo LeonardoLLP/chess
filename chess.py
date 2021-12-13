@@ -71,7 +71,7 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
     x = move_[1]
     y = move_[0]
 
-    cannival = get_piece(dest_[0], dest_[1]) in colour_list_
+    cannival = board[dest_[0]][dest_[1]] in colour_list_
 
     if move_ == [0, 0]:
         return False
@@ -192,6 +192,8 @@ def ask_to_move(colour: dict):
 
 ask_to_move(white)
 
+
+print_board()
 
 
 try:
