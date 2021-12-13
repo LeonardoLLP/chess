@@ -56,7 +56,7 @@ def move_piece(origin_: list, dest_: list, piece: str):
     board[dest_[0]][dest_[1]] = piece
 
 def get_box(row_, column_):
-    return [row_ - 1, column_ - 1]
+    return [int(row_) - 1, int(column_) - 1]
 
 """Obtain piece in intended spot"""
 def get_piece(row, column):
@@ -171,7 +171,7 @@ def ask_to_move(colour: dict):
         move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
 
         if dest_piece == "INVALID PLACE":
-            pass
+            print("Destination outside of board")
         elif is_valid(move_coor, dest_box, origin_piece, colour_list):
             move_piece(origin_box, dest_box, origin_piece)
         else:
@@ -180,10 +180,10 @@ def ask_to_move(colour: dict):
 
 
 
-    elif origin_box == "INVALID PLACE":
+    elif origin_piece == "INVALID PLACE":
         print("Choose a place inside the board. (Row and column in numbers)")
 
-    elif origin_box != "":
+    elif origin_piece != "":
         print("That is not your piece! You can't move it.")
 
     else:
