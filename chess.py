@@ -9,6 +9,7 @@ white = {
     "knight": chr(0x2658),
     "pawn": chr(0x2659)
 }
+white_pieces = list(white.values())
 
 black = {
     "king": chr(0x265A),
@@ -18,6 +19,12 @@ black = {
     "knight": chr(0x265E),
     "pawn": chr(0x265F)
 }
+black_pieces = list(black.values())
+
+keys = list(white.keys())
+
+print(keys)
+
 
 colours = {
     "white": white,
@@ -49,7 +56,7 @@ def add_pieces(places: list, piece: str):
 """Obtain piece in intended spot"""
 def get_piece(row: int, column: int):
     try:
-        return board[row - 1][column - 1]
+        return board[int(row) - 1][int(column) - 1]
     except:
         return "INVALID PLACE"
 
@@ -96,14 +103,14 @@ def ask_to_move(colour: dict):
         turn = "black"
     print("It is {} turn".format(turn + "\'s"))
 
-    origin_r = int(input("Please choose a row: "))
-    origin_c = int(input("Please choose a column: "))
+    origin_r = input("Please choose a row: ")
+    origin_c = input("Please choose a column: ")
     origin_box = get_piece(origin_r, origin_c)  # Easier to understand
 
     if origin_box in list(colour.values()):
         print("Choose where to move your piece")
-        dest_r = int(input("Choose destination row: "))
-        dest_c = int(input("Choose destination column: "))
+        dest_r = input("Choose destination row: ")
+        dest_c = input("Choose destination column: ")
         dest_box = get_piece(dest_r, dest_c)
 
 
@@ -122,6 +129,7 @@ def ask_to_move(colour: dict):
 
 
 ask_to_move(white)
+
 
 print(list(white.values()))
 
