@@ -73,8 +73,15 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
     piece_str = keys[colour_list_.index(piece_)]
     y = move_[0]
     x = move_[1]
-    x_s = int(x / abs(x))  # x sign
-    y_s = int(y / abs(y))  # y sign
+
+    if x != 0:
+        x_s = int(x / abs(x))
+    else:
+        x_s = 0  # x sign
+    if y != 0:
+        y_s = int(y / abs(y))
+    else:
+        y_s = 0
 
     cannival = board[dest_[0]][dest_[1]] in colour_list_
 
@@ -158,7 +165,7 @@ add_pieces([(8, 5)], black["king"])
 
 # Add pawns
 # TODO: Return to standard value
-add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
+add_pieces([(2, i) for i in range(1, 3)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
 print_board()
