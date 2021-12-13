@@ -53,8 +53,18 @@ def add_pieces(places: list, piece: str):
     for place in places:
         board[place[0]-1][place[1]-1] = piece
 
+def is_valid(move_: list, piece_: str):
+    pass
+
+def move_piece(origin_: list, dest_: list, piece: str):
+    board[origin_[0]][origin_[1]] = ""
+    board[dest_[0]][dest_[1]] = piece
+
+def get_box(row_, column_):
+    return [row_ - 1, column_ - 1]
+
 """Obtain piece in intended spot"""
-def get_piece(row: int, column: int):
+def get_piece(row, column):
     try:
         return board[int(row) - 1][int(column) - 1]
     except:
@@ -106,13 +116,15 @@ def ask_to_move(colour: dict):
 
     origin_r = input("Please choose a row: ")
     origin_c = input("Please choose a column: ")
-    origin_box = get_piece(origin_r, origin_c)  # Easier to understand
+    origin_box = get_box(origin_r, origin_c)  # Easier to understand
+    origin_piece = get_piece(origin_r, origin_c)
 
-    if origin_box in list(colour.values()):
+    if origin_piece in list(colour.values()):
         print("Choose where to move your piece")
         dest_r = input("Choose destination row: ")
         dest_c = input("Choose destination column: ")
-        dest_box = get_piece(dest_r, dest_c)
+        dest_box = get_box(dest_r, dest_c)
+        dest_piece = get_piece(dest_r, dest_c)
 
 
 
