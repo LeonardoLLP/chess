@@ -56,7 +56,11 @@ def move_piece(origin_: list, dest_: list, piece: str):
     board[dest_[0]][dest_[1]] = piece
 
 def get_box(row_, column_):
-    return [int(row_) - 1, int(column_) - 1]
+    try:
+        return [int(row_) - 1, int(column_) - 1]
+    except:
+        return None
+
 
 """Obtain piece in intended spot"""
 def get_piece(row, column):
@@ -173,7 +177,7 @@ def print_board():
 # Add white pieces
 add_pieces([(1, 1), (1, 8)], white["rook"])
 add_pieces([(1, 2), (1, 7)], white["knight"])
-add_pieces([(1, 3), (1, 6), (4, 6)], white["bishop"])
+add_pieces([(1, 3), (1, 6)], white["bishop"])
 add_pieces([(1, 4)], white["queen"])
 add_pieces([(1, 5)], white["king"])
 
@@ -186,7 +190,7 @@ add_pieces([(8, 5)], black["king"])
 
 # Add pawns
 # TODO: Return to standard value
-add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
+# add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
 print_board()
@@ -238,8 +242,11 @@ def ask_to_move(colour: dict):
     else:
         print("You have chosen an empty space. You can't do that.")
 
+keep_playing = ""
+while keep_playing != "0":
+    ask_to_move(white)
+    keep_playing = input("Do you want to keep moving?")
 
-ask_to_move(white)
 
 # if is_white_turn:
 #     ask_to_move(white)
@@ -255,3 +262,5 @@ try:
     f.write("Board")
 finally:
     f.close()
+
+# ERROR: porqué 0, 0 no da invalid place?
