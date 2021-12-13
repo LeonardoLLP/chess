@@ -152,7 +152,7 @@ def print_board():
 # Add white pieces
 add_pieces([(1, 1), (1, 8)], white["rook"])
 add_pieces([(1, 2), (1, 7)], white["knight"])
-add_pieces([(1, 3), (1, 6)], white["bishop"])
+add_pieces([(1, 3), (1, 6), (4, 6)], white["bishop"])
 add_pieces([(1, 4)], white["queen"])
 add_pieces([(1, 5)], white["king"])
 
@@ -165,7 +165,7 @@ add_pieces([(8, 5)], black["king"])
 
 # Add pawns
 # TODO: Return to standard value
-add_pieces([(2, i) for i in range(1, 3)], white["pawn"])
+add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
 print_board()
