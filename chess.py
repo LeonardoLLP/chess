@@ -21,7 +21,7 @@ black = {
 }
 black_pieces = list(black.values())
 
-keys = list(white.keys())
+keys = list(white.keys())  # = list(black.keys())
 
 print(keys)
 
@@ -60,7 +60,7 @@ def get_piece(row: int, column: int):
     except:
         return "INVALID PLACE"
 
-
+"""Print the board in the "correct" way (white down, black up)"""
 def print_board():
     for row in range(1, len(board) + 1):
         # Simplify a bit this variable
@@ -74,6 +74,7 @@ def print_board():
         print("]")
 
 # TODO: Revisar si es optimizable
+#! BOARD SETUP
 # Add white pieces
 add_pieces([(1, 1), (1, 8)], white["rook"])
 add_pieces([(1, 2), (1, 7)], white["knight"])
