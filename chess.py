@@ -1,5 +1,5 @@
-rows = 8
-columns = 8
+# rows = 8
+# columns = 8
 
 white = {
     "king": chr(0x2654),
@@ -23,13 +23,7 @@ black_pieces = list(black.values())
 
 keys = list(white.keys())  # = list(black.keys())
 
-print(keys)
 
-
-colours = {
-    "white": white,
-    "white": black
-}
 
 # in case I need it later
 checkered_board = chr(0x1F67E)
@@ -53,9 +47,10 @@ def add_pieces(places: list, piece: str):
     for place in places:
         board[place[0]-1][place[1]-1] = piece
 
-def is_valid(move_: list, piece_: str):
-    pass
 
+
+
+"""Move piece, independently if it can or not (check done in is_valid function)"""
 def move_piece(origin_: list, dest_: list, piece: str):
     board[origin_[0]][origin_[1]] = ""
     board[dest_[0]][dest_[1]] = piece
@@ -69,6 +64,42 @@ def get_piece(row, column):
         return board[int(row) - 1][int(column) - 1]
     except:
         return "INVALID PLACE"
+
+"""Determine if a move is valid"""
+def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
+    piece_str = keys[colour_list_.index(piece_)]
+
+    cannival = get_piece(dest_[0], dest_[1]) in colour_list_
+
+    if move_ == [0, 0]:
+        return False
+    elif cannival:
+        return False
+
+
+    if piece_str == "king":
+        if abs(move_[0]) <= 1 and abs(move_[1]) <= 1:
+            return True
+        else:
+            return False
+
+    elif piece_str == "knight":
+        pass
+
+    elif piece_str == "bishop":
+        pass
+
+    elif piece_str == "rook":
+        pass
+
+    elif piece_str == "queen":
+        pass
+
+    elif piece_str == "pawn":
+        pass
+
+
+
 
 """Print the board in the "correct" way (white down, black up)"""
 def print_board():
@@ -110,8 +141,10 @@ def ask_to_move(colour: dict):
     # Search for white piece in dictonary
     if colour["king"] == white["king"]:
         turn = "white"
+        colour_list = white_pieces
     else:
         turn = "black"
+        colour_list = black_pieces
     print("It is {} turn".format(turn + "\'s"))
 
     origin_r = input("Please choose a row: ")
@@ -119,14 +152,19 @@ def ask_to_move(colour: dict):
     origin_box = get_box(origin_r, origin_c)  # Easier to understand
     origin_piece = get_piece(origin_r, origin_c)
 
+
     if origin_piece in list(colour.values()):
         print("Choose where to move your piece")
         dest_r = input("Choose destination row: ")
         dest_c = input("Choose destination column: ")
         dest_box = get_box(dest_r, dest_c)
         dest_piece = get_piece(dest_r, dest_c)
+        move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
 
-
+        if is_valid(move_coor, dest_box, origin_piece, colour_list):
+            move_piece(origin_box, dest_box, origin_piece)
+        else:
+            print("Destination isn't valid.")
 
 
 
