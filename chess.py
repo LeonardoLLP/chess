@@ -1,6 +1,9 @@
 # rows = 8
 # columns = 8
 
+# Control-flow variables
+is_white_turn = True
+
 white = {
     "king": chr(0x2654),
     "queen": chr(0x2655),
@@ -70,6 +73,8 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
     piece_str = keys[colour_list_.index(piece_)]
     x = move_[1]
     y = move_[0]
+    x_s = int(x / abs(x))  # x sign
+    y_s = int(y / abs(y))  # y sign
 
     cannival = board[dest_[0]][dest_[1]] in colour_list_
 
@@ -97,6 +102,8 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
 
     elif piece_str == "bishop":
         pass
+        if abs(x) == abs(y):
+            pass
 
     elif piece_str == "rook":
         pass
@@ -190,7 +197,9 @@ def ask_to_move(colour: dict):
         print("You have chosen an empty space. You can't do that.")
 
 
-ask_to_move(white)
+if is_white_turn:
+    ask_to_move(white)
+    is_white_turn = False
 
 
 print_board()
