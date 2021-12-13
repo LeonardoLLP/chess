@@ -68,6 +68,8 @@ def get_piece(row, column):
 """Determine if a move is valid"""
 def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
     piece_str = keys[colour_list_.index(piece_)]
+    x = move_[1]
+    y = move_[0]
 
     cannival = get_piece(dest_[0], dest_[1]) in colour_list_
 
@@ -78,13 +80,20 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
 
 
     if piece_str == "king":
-        if abs(move_[0]) <= 1 and abs(move_[1]) <= 1:
+        if abs(x) <= 1 and abs(y) <= 1:
             return True
         else:
             return False
 
     elif piece_str == "knight":
-        pass
+        if abs(x) == 1 and abs(y) == 2:
+            return True
+        elif abs(x) == 2 and abs(y) == 1:
+            return True
+        else:
+            return False
+
+
 
     elif piece_str == "bishop":
         pass
@@ -147,21 +156,23 @@ def ask_to_move(colour: dict):
         colour_list = black_pieces
     print("It is {} turn".format(turn + "\'s"))
 
-    origin_r = input("Please choose a row: ")
     origin_c = input("Please choose a column: ")
+    origin_r = input("Please choose a row: ")
     origin_box = get_box(origin_r, origin_c)  # Easier to understand
     origin_piece = get_piece(origin_r, origin_c)
 
 
     if origin_piece in list(colour.values()):
         print("Choose where to move your piece")
-        dest_r = input("Choose destination row: ")
         dest_c = input("Choose destination column: ")
+        dest_r = input("Choose destination row: ")
         dest_box = get_box(dest_r, dest_c)
         dest_piece = get_piece(dest_r, dest_c)
         move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
 
-        if is_valid(move_coor, dest_box, origin_piece, colour_list):
+        if dest_piece == "INVALID PLACE":
+            pass
+        elif is_valid(move_coor, dest_box, origin_piece, colour_list):
             move_piece(origin_box, dest_box, origin_piece)
         else:
             print("Destination isn't valid.")
@@ -182,7 +193,6 @@ def ask_to_move(colour: dict):
 ask_to_move(white)
 
 
-print(list(white.values()))
 
 try:
     f = open("partida.txt", "w")
