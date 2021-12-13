@@ -141,7 +141,7 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
 
     elif piece_str == "queen":
         if x == 0 or y == 0 or abs(x) == abs(y):
-            places_to_pass = [(i * y_s, i * x_s) for i in range(1, max(abs(x), abs(y))]
+            places_to_pass = [(i * y_s, i * x_s) for i in range(1, max(abs(x), abs(y)))]
             for place in places_to_pass:
                 try:
                     if board[dest_[0]-place[0]][dest_[1]-place[1]] != "":
