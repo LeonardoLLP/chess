@@ -71,14 +71,14 @@ def get_piece(row, column):
 """Determine if a move is valid"""
 def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
     piece_str = keys[colour_list_.index(piece_)]
-    x = move_[1]
     y = move_[0]
+    x = move_[1]
     x_s = int(x / abs(x))  # x sign
     y_s = int(y / abs(y))  # y sign
 
     cannival = board[dest_[0]][dest_[1]] in colour_list_
 
-    if move_ == [0, 0]:
+    if move_ == [0, 0]:  # Innecesario: cannival da verdadero ya que es su misma casilla
         return False
     elif cannival:
         return False
@@ -98,12 +98,22 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
         else:
             return False
 
-
-
+    # Si me preguntas no entiendo ni yo que cojones estoy haciendo.
+    # El programa INTENTA iterar por cada posición que tiene que pasar el alfil a ver si está libre. DEBERÍA DE FUNCIONAR.
+    # TODO: Test
     elif piece_str == "bishop":
-        pass
         if abs(x) == abs(y):
-            pass
+            places_to_pass = [(i * y_s, i * x_s) for i in range(1, abs(x))]
+            for place in places_to_pass:
+                try:
+                    if board[dest_[0]-place[0]][dest_[1]-place[1]] != "":
+                        return False
+                except:
+                    return False
+            return True
+        else:
+            return False
+
 
     elif piece_str == "rook":
         pass
@@ -147,6 +157,7 @@ add_pieces([(8, 4)], black["queen"])
 add_pieces([(8, 5)], black["king"])
 
 # Add pawns
+# TODO: Return to standard value
 add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
@@ -177,10 +188,13 @@ def ask_to_move(colour: dict):
         dest_piece = get_piece(dest_r, dest_c)
         move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
 
+
         if dest_piece == "INVALID PLACE":
             print("Destination outside of board")
+
         elif is_valid(move_coor, dest_box, origin_piece, colour_list):
             move_piece(origin_box, dest_box, origin_piece)
+
         else:
             print("Destination isn't valid.")
 
@@ -197,10 +211,13 @@ def ask_to_move(colour: dict):
         print("You have chosen an empty space. You can't do that.")
 
 
-if is_white_turn:
-    ask_to_move(white)
-    is_white_turn = False
+ask_to_move(white)
 
+# if is_white_turn:
+#     ask_to_move(white)
+# else:
+#     ask_to_move(black)
+# is_white_turn = not is_white_turn
 
 print_board()
 
