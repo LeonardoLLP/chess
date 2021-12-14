@@ -205,12 +205,16 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
                 double_move_enabled = True
             if abs(x) == 1 and y == -1 and landing != "":
                 pawn_moves = True
-            elif x == 0 and y == 1 and landing == "":
+            elif x == 0 and y == -1 and landing == "":
                 pawn_moves = True
-            elif x == 0 and y == 2 and landing == "" and board[dest_[0]][dest_[1] - 1] == "" and double_move_enabled:
+            elif x == 0 and y == -2 and landing == "" and board[dest_[0]][dest_[1] + 1] == "" and double_move_enabled:
                 pawn_moves = True
             else:
                 pawn_moves = False
+
+            if pawn_moves and dest_[0] == 0:
+                promotion(origin_)
+            return pawn_moves
 
 
 
