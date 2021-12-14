@@ -288,7 +288,7 @@ def ask_to_move(colour: dict):
                 print("Destination outside of board")
 
             elif is_valid(origin_box, move_coor, dest_box, origin_piece, colour_list):
-                origin_box = get_box(origin_r, origin_c)  # Needed to check for promotion issues
+                origin_piece = get_piece(origin_r, origin_c)  # Needed to check for promotion issues
                 move_piece(origin_box, dest_box, origin_piece)
                 piece_is_moved = True
 
