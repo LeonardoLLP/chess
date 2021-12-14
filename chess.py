@@ -255,26 +255,28 @@ def ask_to_move(colour: dict):
     else:
         print("You have chosen an empty space. You can't do that.")
 
+# Starting game
+game = []
 keep_playing = ""
 while keep_playing != "0":
-    ask_to_move(white)
+    if is_white_turn:
+        ask_to_move(white)
+    else:
+        ask_to_move(black)
+
     print_board()
+    add_board(game)
+
+    is_white_turn = not is_white_turn
     keep_playing = input("Do you want to keep playing? ")
 
 
-# if is_white_turn:
-#     ask_to_move(white)
-# else:
-#     ask_to_move(black)
-# print_board()
-# is_white_turn = not is_white_turn
-
-print_board()
+# Check for move of game
 
 
 try:
     f = open("partida.txt", "w")
-    f.write("Board")
+    f.write(str(game))
 finally:
     f.close()
 
