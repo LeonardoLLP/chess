@@ -5,6 +5,7 @@ from time import sleep
 
 # Control-flow variables
 is_white_turn = True
+game_ended = False
 
 white = {
     "king": chr(0x2654),
@@ -251,7 +252,7 @@ add_pieces([(8, 5)], black["king"])
 
 # Add pawns
 # TODO: Return to standard value
-# add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
+add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
 print_board()
@@ -319,13 +320,22 @@ while keep_playing != "0":
     print_board()
     add_board(game)
 
+    if white["king"] not in board or black["king"] not in board:
+        game_ended = True
+        break
+
     is_white_turn = not is_white_turn
-    keep_playing = input("Do you want to keep playing? ")
+    keep_playing = input("Do you want to keep playing? (0 to exit, enter to continue)")
+
+if game_ended:
+    if is_white_turn:
+        print("White won the game!")
+    else:
+        print("Black won the game!")
 
 # Check for move of game
-
 while True:
-    review = input("Choose a move to review the board (or enter 0 to exit): ")
+    review = input("Choose a move to review the board (0 to exit): ")
     try:
         review = int(review)
     except:
