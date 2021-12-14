@@ -113,10 +113,13 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
     cannival = board[dest_[0]][dest_[1]] in colour_list_
 
 
+    # if landing = piece in my colour list or i don't move, return False
     if move_ == [0, 0]:  # Innecesario: cannival da verdadero ya que es su misma casilla
         return False
     elif cannival:
         return False
+
+
 
 
     if piece_str == "king":
@@ -177,23 +180,37 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
         else:
             return False
 
-
+    #* Sinceramente, no me voy ni a molestar en optimizarlo. Se repite código pero me va a estallar la cabeza.
     elif piece_str == "pawn":
-        double_move = False
+        double_move_enabled = False
         if piece_ == white["pawn"]:
             if origin_[0] == 1:
-                double_move = True
+                double_move_enabled = True
             if abs(x) == y == 1 and landing != "":
-                return True
+                pawn_moves = True
             elif x == 0 and y == 1 and landing == "":
-                return True
-            elif x == 0 and y == 2 and landing == "" and board[dest_[0]][dest_[1] - 1] == "":
-                return True
+                pawn_moves = True
+            elif x == 0 and y == 2 and landing == "" and board[dest_[0]][dest_[1] - 1] == "" and double_move_enabled:
+                pawn_moves = True
+            else:
+                pawn_moves = False
+
+            if pawn_moves and dest_[0] == 7:
+                promotion(origin_)
+            return pawn_moves
 
 
         elif piece_ == black["pawn"]:
             if origin_[0] == 6:
-                pass  # Double move option
+                double_move_enabled = True
+            if abs(x) == 1 and y == -1 and landing != "":
+                pawn_moves = True
+            elif x == 0 and y == 1 and landing == "":
+                pawn_moves = True
+            elif x == 0 and y == 2 and landing == "" and board[dest_[0]][dest_[1] - 1] == "" and double_move_enabled:
+                pawn_moves = True
+            else:
+                pawn_moves = False
 
 
 
