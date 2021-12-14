@@ -252,8 +252,6 @@ add_pieces([(8, 5)], black["king"])
 add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
 
-add_pieces([(7, 5)], white["pawn"])
-
 print_board()
 
 
