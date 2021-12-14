@@ -173,10 +173,10 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
 
 
 """Print the board in the "correct" way (white down, black up)"""
-def print_board():
-    for row in range(1, len(board) + 1):
+def print_board(board_=board):
+    for row in range(1, len(board_) + 1):
         # Simplify a bit this variable
-        row_to_print = board[-row]
+        row_to_print = board_[-row]
         print("[", end="")
         for index in range(len(row_to_print)):
             if index != len(row_to_print) - 1:
@@ -219,41 +219,45 @@ def ask_to_move(colour: dict):
         colour_list = black_pieces
     print("It is {} turn".format(turn + "\'s"))
 
-    origin_c = input("Please choose a column: ")
-    origin_r = input("Please choose a row: ")
-    origin_box = get_box(origin_r, origin_c)  # Easier to understand
-    origin_piece = get_piece(origin_r, origin_c)
+    piece_is_moved = False
+    while not piece_is_moved:
+        origin_c = input("Please choose a column: ")
+        origin_r = input("Please choose a row: ")
+        origin_box = get_box(origin_r, origin_c)  # Easier to understand
+        origin_piece = get_piece(origin_r, origin_c)
 
 
-    if origin_piece in list(colour.values()):
-        print("Choose where to move your piece")
-        dest_c = input("Choose destination column: ")
-        dest_r = input("Choose destination row: ")
-        dest_box = get_box(dest_r, dest_c)
-        dest_piece = get_piece(dest_r, dest_c)
-        move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
+        if origin_piece in list(colour.values()):
+            print("Choose where to move your piece")
+            dest_c = input("Choose destination column: ")
+            dest_r = input("Choose destination row: ")
+            dest_box = get_box(dest_r, dest_c)
+            dest_piece = get_piece(dest_r, dest_c)
+            move_coor = [dest_box[0] - origin_box[0], dest_box[1] - origin_box[1]]
 
 
-        if dest_piece == "INVALID PLACE":
-            print("Destination outside of board")
+            if dest_piece == "INVALID PLACE":
+                print("Destination outside of board")
 
-        elif is_valid(origin_box, move_coor, dest_box, origin_piece, colour_list):
-            move_piece(origin_box, dest_box, origin_piece)
+            elif is_valid(origin_box, move_coor, dest_box, origin_piece, colour_list):
+                move_piece(origin_box, dest_box, origin_piece)
+                piece_is_moved = True
+
+            else:
+                print("Destination isn't valid.")
+
+
+
+
+        elif origin_piece == "INVALID PLACE":
+            print("Choose a place inside the board. (Row and column in numbers)")
+
+        elif origin_piece != "":
+            print("That is not your piece! You can't move it.")
 
         else:
-            print("Destination isn't valid.")
+            print("You have chosen an empty space. You can't do that.")
 
-
-
-
-    elif origin_piece == "INVALID PLACE":
-        print("Choose a place inside the board. (Row and column in numbers)")
-
-    elif origin_piece != "":
-        print("That is not your piece! You can't move it.")
-
-    else:
-        print("You have chosen an empty space. You can't do that.")
 
 # Starting game
 game = []
@@ -270,8 +274,23 @@ while keep_playing != "0":
     is_white_turn = not is_white_turn
     keep_playing = input("Do you want to keep playing? ")
 
-
 # Check for move of game
+
+while True:
+    review = input("Choose a move to review the board (or enter 0 to exit): ")
+    try:
+        review = int(review)
+    except:
+        print("That is not a number")
+        continue
+
+    try:
+        if review == 0:
+            break
+        else:
+            print_board(game[review - 1])
+    except:
+        print("The number you've chosen is out of range")
 
 
 try:
