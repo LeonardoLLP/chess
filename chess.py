@@ -70,7 +70,7 @@ def get_piece(row, column):
         return "INVALID PLACE"
 
 """Determine if a move is valid"""
-def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
+def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_: list):
     piece_str = keys[colour_list_.index(piece_)]
     y = move_[0]
     x = move_[1]
@@ -154,7 +154,11 @@ def is_valid(move_: list, dest_: list, piece_: str, colour_list_: list):
 
 
     elif piece_str == "pawn":
-        pass
+        if origin_[0] == 1 and piece_ == white["pawn"]:
+            pass
+        elif origin_[0] == 6 and piece_ == black["pawn"]:
+            pass
+
 
 
 
@@ -224,7 +228,7 @@ def ask_to_move(colour: dict):
         if dest_piece == "INVALID PLACE":
             print("Destination outside of board")
 
-        elif is_valid(move_coor, dest_box, origin_piece, colour_list):
+        elif is_valid(origin_box, move_coor, dest_box, origin_piece, colour_list):
             move_piece(origin_box, dest_box, origin_piece)
 
         else:
@@ -246,13 +250,14 @@ keep_playing = ""
 while keep_playing != "0":
     ask_to_move(white)
     print_board()
-    keep_playing = input("Do you want to keep moving? ")
+    keep_playing = input("Do you want to keep playing? ")
 
 
 # if is_white_turn:
 #     ask_to_move(white)
 # else:
 #     ask_to_move(black)
+# print_board()
 # is_white_turn = not is_white_turn
 
 print_board()
