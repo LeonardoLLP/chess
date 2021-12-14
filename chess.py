@@ -45,6 +45,10 @@ for i in range(8):
 
 print(board)
 
+"""Add board to list (of moves)"""
+def add_board(board_: list):
+    board_.append(board)
+
 """Add piece to intended spot, easier for the user"""
 def add_pieces(places: list, piece: str):
     for place in places:
@@ -54,6 +58,7 @@ def add_pieces(places: list, piece: str):
 def move_piece(origin_: list, dest_: list, piece: str):
     board[origin_[0]][origin_[1]] = ""
     board[dest_[0]][dest_[1]] = piece
+
 
 def get_box(row_, column_):
     try:
@@ -154,10 +159,14 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
 
 
     elif piece_str == "pawn":
-        if origin_[0] == 1 and piece_ == white["pawn"]:
-            pass
-        elif origin_[0] == 6 and piece_ == black["pawn"]:
-            pass
+        if piece_ == white["pawn"]:
+            if origin_[0] == 1:
+                pass  # Double move option
+
+
+        elif piece_ == black["pawn"]:
+            if origin_[0] == 6:
+                pass  # Double move option
 
 
 
