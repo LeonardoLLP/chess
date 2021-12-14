@@ -1,3 +1,5 @@
+from time import sleep
+
 # rows = 8
 # columns = 8
 
@@ -45,6 +47,22 @@ for i in range(8):
 
 print(board)
 
+"""Promotes a pawn"""
+def promotion(box_: list):
+    if is_white_turn:
+        colour = white
+    else:
+        colour = black
+
+    while True:
+        promotion_piece = input("Please choose the piece to promote too: ")
+        if promotion_piece in keys and promotion_piece not in ["king", "pawn"]:
+            board[box_[0]][box_[1]] = colour[promotion_piece]
+            break
+        else:
+            print("Please choose a valid piece (queen, rook, knight or bishop")
+
+
 """Add board to list (of moves)"""
 def add_board(board_: list):
     board_.append(board)
@@ -59,7 +77,7 @@ def move_piece(origin_: list, dest_: list, piece: str):
     board[origin_[0]][origin_[1]] = ""
     board[dest_[0]][dest_[1]] = piece
 
-
+"""Returns box human-like"""
 def get_box(row_, column_):
     try:
         return [int(row_) - 1, int(column_) - 1]
@@ -79,6 +97,8 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
     piece_str = keys[colour_list_.index(piece_)]
     y = move_[0]
     x = move_[1]
+
+    landing = board[dest_[0]][dest_[1]] # To simplify pawn movement function
 
     if x != 0:
         x_s = int(x / abs(x))
@@ -159,9 +179,16 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
 
 
     elif piece_str == "pawn":
+        double_move = False
         if piece_ == white["pawn"]:
             if origin_[0] == 1:
-                pass  # Double move option
+                double_move = True
+            if abs(x) == y == 1 and landing != "":
+                return True
+            elif x == 0 and y == 1 and landing == "":
+                return True
+            elif x == 0 and y == 2 and landing == "" and board[dest_[0]][dest_[1] - 1] == "":
+                return True
 
 
         elif piece_ == black["pawn"]:
@@ -293,9 +320,10 @@ while True:
         print("The number you've chosen is out of range")
 
 
+# TODO: Need to encode the board to string (tuples)
 try:
     f = open("partida.txt", "w")
-    f.write(str(game))
+    f.write()
 finally:
     f.close()
 
