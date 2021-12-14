@@ -26,8 +26,6 @@ black_pieces = list(black.values())
 
 keys = list(white.keys())  # = list(black.keys())
 
-
-
 # Creating a board
 board = []
 for i in range(8):
@@ -36,6 +34,8 @@ for i in range(8):
         board[i].append("")
 
 print(board)
+
+#! FUNCTIONS - FUNCTIONS - FUNCTIONS - FUNCTIONS - FUNCTIONS - FUNCTIONS
 
 """Promotes a pawn"""
 def promotion(box_: list):
@@ -51,6 +51,18 @@ def promotion(box_: list):
             break
         else:
             print("Please choose a valid piece (queen, rook, knight or bishop")
+
+"""Checks for end of the game"""
+def game_ended():
+    board_unpacked = []
+    for row in board:
+        for place in row:
+            board_unpacked.append(place)
+
+    if white["king"] not in board_unpacked or black["king"] not in board_unpacked:
+        return True
+    else:
+        return False
 
 
 """Add board to list (of moves)"""
@@ -73,7 +85,6 @@ def get_box(row_, column_):
         return [int(row_) - 1, int(column_) - 1]
     except:
         return None
-
 
 """Obtain piece in intended spot"""
 def get_piece(row, column):
@@ -208,8 +219,6 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
 
 
 
-
-
 """Print the board in the "correct" way (white down, black up)"""
 def print_board(board_=board):
     for row in range(1, len(board_) + 1):
@@ -240,9 +249,10 @@ add_pieces([(8, 4)], black["queen"])
 add_pieces([(8, 5)], black["king"])
 
 # Add pawns
-# TODO: Return to standard value
 add_pieces([(2, i) for i in range(1, 9)], white["pawn"])
 add_pieces([(7, i) for i in range(1, 9)], black["pawn"])
+
+add_pieces([(7, 5)], white["pawn"])
 
 print_board()
 
@@ -278,6 +288,7 @@ def ask_to_move(colour: dict):
                 print("Destination outside of board")
 
             elif is_valid(origin_box, move_coor, dest_box, origin_piece, colour_list):
+                origin_box = get_box(origin_r, origin_c)  # Needed to check for promotion issues
                 move_piece(origin_box, dest_box, origin_piece)
                 piece_is_moved = True
 
@@ -309,18 +320,15 @@ while keep_playing != "0":
     print_board()
     add_board(game)
 
-    if white["king"] not in board or black["king"] not in board:
-        game_ended = True
+    if game_ended():
+        if is_white_turn:
+            print("White won the game!")
+        else:
+            print("Black won the game!")
         break
 
     is_white_turn = not is_white_turn
     keep_playing = input("Do you want to keep playing? (0 to exit, enter to continue)")
-
-if game_ended:
-    if is_white_turn:
-        print("White won the game!")
-    else:
-        print("Black won the game!")
 
 # Check for move of game
 while True:
@@ -343,7 +351,7 @@ while True:
 # TODO: Need to encode the board to string (tuples)
 try:
     f = open("partida.txt", "w")
-    f.write()
+    f.write("")
 finally:
     f.close()
 
