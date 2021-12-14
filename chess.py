@@ -1,8 +1,5 @@
 from time import sleep
 
-# rows = 8
-# columns = 8
-
 # Control-flow variables
 is_white_turn = True
 game_ended = False
@@ -30,14 +27,6 @@ black_pieces = list(black.values())
 keys = list(white.keys())  # = list(black.keys())
 
 
-
-# in case I need it later
-checkered_board = chr(0x1F67E)
-
-
-print(white)
-print(black)
-print(checkered_board)
 
 # Creating a board
 board = []
