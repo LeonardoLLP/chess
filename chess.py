@@ -24,7 +24,11 @@ black = {
 }
 black_pieces = list(black.values())
 
+
+
 keys = list(white.keys())  # = list(black.keys())
+
+print(list(white.values()))
 
 # Creating a board
 board = []
@@ -345,6 +349,16 @@ while True:
     except:
         print("The number you've chosen is out of range")
 
+
+#! ENCODE THE GAME TO STRING
+for board in game:
+    for row in board:
+        for piece in row:
+            if piece in list(white.values()):
+                
+
+
+# Encode the board
 
 # TODO: Need to encode the board to string (tuples)
 try:
