@@ -126,7 +126,6 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
 
 
 
-
     if piece_str == "king":
         if abs(x) <= 1 and abs(y) <= 1:
             return True
@@ -141,8 +140,6 @@ def is_valid(origin_: list, move_: list, dest_: list, piece_: str, colour_list_:
         else:
             return False
 
-    # Si me preguntas no entiendo ni yo que cojones estoy haciendo.
-    # El programa INTENTA iterar por cada posición que tiene que pasar el alfil a ver si está libre. DEBERÍA DE FUNCIONAR.
     # TODO: OPTIMIZAR la repetición de código
     elif piece_str == "bishop":
         if abs(x) == abs(y):
@@ -236,7 +233,7 @@ def print_board(board_=board):
                 print("{:6}".format("\'" + row_to_print[index] + "\'"), end="")
         print("]")
 
-# TODO: Revisar si es optimizable
+
 #! BOARD SETUP
 # Add white pieces
 add_pieces([(1, 1), (1, 8)], white["rook"])
@@ -363,14 +360,9 @@ for board in game:
 
 
 
-
-# Encode the board
-# TODO: Need to encode the board to string (tuples)
 try:
     f = open("partida.txt", "w")
     for board in game:
         f.write(str(board) + "\n")
 finally:
     f.close()
-
-# ERROR: porqué 0, 0 no da invalid place?
