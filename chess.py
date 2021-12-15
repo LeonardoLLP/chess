@@ -362,13 +362,14 @@ for board in game:
                 row[piece_i] = (keys[key], "black")
 
 
-print(game)
+
 
 # Encode the board
 # TODO: Need to encode the board to string (tuples)
 try:
     f = open("partida.txt", "w")
-    f.write("")
+    for board in game:
+        f.write(str(board) + "\n")
 finally:
     f.close()
 
