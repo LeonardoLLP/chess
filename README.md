@@ -18,6 +18,8 @@ Esto sin embargo da paso a un segundo problema. El rey no puede enrocar ni si es
 
 Por último, la partida se acaba con un ganador cuando el rey es comido, pero normalmente en el ajedrez se acaba con un "jaque-mate". Pero programar esto, teniendo la función de *in_check* programada, es pan comido. Solamente hace falta comprobar, si el rey acaba en jaque después de haber movido, si todas sus jugadas legales también devuelven **True** con la función *in_check*.
 
+Ya como adición, sería muy facil realiar un peqeño programa que lea las partidas hechas, y por tanto, que puedas guardar partidas con distintos nombres y volver a verlas más tarde. Solamente haría falta re-codificarlas, pero eso no supondría un problema: tendríamos que realizar el proceso invertido a lo hecho para codificarlo a "string".
+
 Dejo el código a continuación:
 
 ```python
