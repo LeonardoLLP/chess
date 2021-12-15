@@ -24,8 +24,8 @@ black = {
 }
 black_pieces = list(black.values())
 
-
-
+white_list = list(white.values())
+black_list = list(black.values())
 keys = list(white.keys())  # = list(black.keys())
 
 print(list(white.values()))
@@ -354,12 +354,17 @@ while True:
 for board in game:
     for row in board:
         for piece in row:
-            if piece in list(white.values()):
-                
+            if piece in white_list:
+                key = white_list.index(piece)
+                piece = (keys[key], "white")
+            elif piece in black_list:
+                key = black_list.index(piece)
+                piece = (keys[key], "black")
 
+
+print(game)
 
 # Encode the board
-
 # TODO: Need to encode the board to string (tuples)
 try:
     f = open("partida.txt", "w")
