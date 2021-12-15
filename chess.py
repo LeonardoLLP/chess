@@ -353,13 +353,13 @@ while True:
 #! ENCODE THE GAME TO STRING
 for board in game:
     for row in board:
-        for piece in row:
-            if piece in white_list:
-                key = white_list.index(piece)
-                piece = (keys[key], "white")
-            elif piece in black_list:
-                key = black_list.index(piece)
-                piece = (keys[key], "black")
+        for piece_i in range(len(row)):
+            if row[piece_i] in white_list:
+                key = white_list.index(row[piece_i])
+                row[piece_i] = (keys[key], "white")
+            elif row[piece_i] in black_list:
+                key = black_list.index(row[piece_i])
+                row[piece_i] = (keys[key], "black")
 
 
 print(game)
